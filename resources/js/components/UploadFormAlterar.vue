@@ -1,7 +1,12 @@
 <template>
-    <div>
-        <input class="teste" type="file" name="image" @change="GetImage">
-        <img class="teste" :src= "avatar" alt="Image">
+    <div class="delimitar-imagem">
+        <div v-if=" avatar==null" >
+            <img class="imagem-loader" src= "/storage/img-default.jpg" alt="Image">
+        </div>
+        <div v-else> 
+            <img class="imagem-loader"  :src= "avatar" alt="Image">
+        </div> 
+        <input class="input-imagem-cadastro" type="file" name="image" @change="GetImage">
     </div>
 </template>
 
@@ -11,7 +16,6 @@ export default {
 
         props:['user'],
 
-
     data(){
      return {
 
@@ -19,6 +23,7 @@ export default {
 
      }
     },
+    
         methods:{
     
     GetImage(e){

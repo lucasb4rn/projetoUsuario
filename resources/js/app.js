@@ -31,8 +31,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 import UploadForm from './components/UploadForm';
 import UploadFormAlterar from './components/UploadFormAlterar';
 
-
-
 //adicionar
 const app = new Vue({
     el: '#app',
@@ -40,11 +38,10 @@ const app = new Vue({
 
 });
 
-//alterar
-// const app1 = new Vue({
-//     el: '#app1',
-//     components:{UploadFormAlterar}
+const app10 = new Vue({
+    el: '#app1',
+    components:{UploadFormAlterar}
 
-// });
+});
 
 

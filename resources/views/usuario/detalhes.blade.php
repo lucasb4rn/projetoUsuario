@@ -18,10 +18,13 @@
             <div class="flex-item2">
                 <ul>
                   <li>
-                    <b>email:</b> {{$user->email}} 
+                    <b>EMAIL:</b> {{$user->email}} 
                   </li>
                   <li>
-                    <b>cpf:</b>  {{$user->cpf}}
+                    <b>CPF:</b>  {{$user->cpf}}
+                  </li>
+                  <li>
+                    <b>SITUACAO:</b>  {{$user->situacao->nome}}
                   </li>
               </ul>
             </div>

@@ -1847,19 +1847,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user'],
   data: function data() {
     return {
-      avatar: this.user.avatar
+      avatar: null
     };
   },
   methods: {
-    replaceByDefault: function replaceByDefault(e) {
-      e.target.src = 'storage/img-default.jpg';
-    },
     GetImage: function GetImage(e) {
       var _this = this;
 
@@ -1874,9 +1868,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     Upload: function Upload() {
       axios.post('/usuarios/adiciona', {
-        'image': this.avatar
-      });
-      axios.post('/usuarios/alterar', {
         'image': this.avatar
       });
     }
@@ -1894,6 +1885,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37076,15 +37072,13 @@ var render = function() {
       ? _c("div", [
           _c("img", {
             staticClass: "imagem-loader",
-            attrs: { src: "/storage/img-default.jpg", alt: "Image" },
-            on: { error: _vm.replaceByDefault }
+            attrs: { src: "/storage/img-default.jpg", alt: "Image" }
           })
         ])
       : _c("div", [
           _c("img", {
             staticClass: "imagem-loader",
-            attrs: { src: _vm.avatar, alt: "Image" },
-            on: { error: _vm.replaceByDefault }
+            attrs: { src: _vm.avatar, alt: "Image" }
           })
         ]),
     _vm._v(" "),
@@ -37117,16 +37111,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "delimitar-imagem" }, [
+    _vm.avatar == null
+      ? _c("div", [
+          _c("img", {
+            staticClass: "imagem-loader",
+            attrs: { src: "/storage/img-default.jpg", alt: "Image" }
+          })
+        ])
+      : _c("div", [
+          _c("img", {
+            staticClass: "imagem-loader",
+            attrs: { src: _vm.avatar, alt: "Image" }
+          })
+        ]),
+    _vm._v(" "),
     _c("input", {
-      staticClass: "teste",
+      staticClass: "input-imagem-cadastro",
       attrs: { type: "file", name: "image" },
       on: { change: _vm.GetImage }
-    }),
-    _vm._v(" "),
-    _c("img", {
-      staticClass: "teste",
-      attrs: { src: _vm.avatar, alt: "Image" }
     })
   ])
 }
@@ -49285,11 +49288,13 @@ var app = new Vue({
   components: {
     UploadForm: _components_UploadForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
-}); //alterar
-// const app1 = new Vue({
-//     el: '#app1',
-//     components:{UploadFormAlterar}
-// });
+});
+var app10 = new Vue({
+  el: '#app1',
+  components: {
+    UploadFormAlterar: _components_UploadFormAlterar__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
 
 /***/ }),
 

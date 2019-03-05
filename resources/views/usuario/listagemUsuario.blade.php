@@ -41,7 +41,7 @@
         </tr>
       </thead>
         @foreach ($usuarios as $user)
-        <tr>
+        <tr class="{{$user->situacao_id > 0 ? 'danger' : '' }}">
           <td> <img class="img-thumbnail" onerror="this.src='/storage/img-default.jpg';" src="{{$user->avatar}}" alt="Imagem"></td>
           <td> {{$user->name}}</td>
           <td> {{$user->email}}</td>

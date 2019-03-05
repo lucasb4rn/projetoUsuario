@@ -22,7 +22,6 @@ class AdicionaTableUsuarios extends Migration
             $table->string('cpf')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
-            $table->string('situacao')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

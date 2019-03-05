@@ -24,7 +24,6 @@
 
 
             <div class="container-flex-cadastro">
-
                 
                 <div class="flex-item-imagem" id="app">
                     <upload-form></upload-from>
@@ -78,7 +77,7 @@
                         <option value="{{$s->id}}">{{$s->nome}}</option>
                         @endforeach
                     </select>    
-</div>
+                    </div>
 
 
                 </div>

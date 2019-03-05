@@ -46,7 +46,7 @@ class UsuarioController extends Controller
         $usuario->email = FacadeRequest::input('email');
         $usuario->cpf = FacadeRequest::input('cpf');
         $usuario->data_nascimento = FacadeRequest::input('data_nascimento');
-
+        $usuario->situacao_id =  FacadeRequest::input('situacao_id');
 
 
 
@@ -102,7 +102,11 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::find($id);
 
-        return view('usuario.alterar')->with('user', $usuario);
+        $usuarioBanco = Usuario::where('id', $id);
+
+        return view('usuario.alterar')->with('user', $usuario)->with('situacao', Situacao::all());
+
+        
     }
 
 
@@ -119,7 +123,8 @@ class UsuarioController extends Controller
     } else {
         $usuarios = Usuario::where('CPF', 'like', '%'.$texto.'%')->paginate(6);    
     }
-        
+
+
         return view('usuario.listagemUsuario')->with('usuarios', $usuarios);
 
     }
@@ -137,6 +142,7 @@ class UsuarioController extends Controller
     }
 
     public function novo() {
+
 
         return view('usuario.formulario')->with('situacao', Situacao::all());
 
@@ -165,6 +171,7 @@ class UsuarioController extends Controller
         $password1 =  FacadeRequest::input('password1');
         $usuario->data_nascimento = self::getFromDateAttribute($usuario->data_nascimento);
         $usuario->password = \Hash::make($usuario->password);
+        $usuario->situacao_id =  FacadeRequest::input('situacao_id');
 
 
         if($request->hasFile('image')) {
@@ -181,25 +188,22 @@ class UsuarioController extends Controller
             //filename to store
             $filenametostore = $filename.'_'.time().'.'.$extension;
 
-            $filenametostore->resize(160, 160);
-     
             //Upload File to s3
             Storage::disk('s3')->put($filenametostore, fopen($request->file('image'), 'r+'), 'public');
             
             $imagenameUrl =  Storage::disk('s3')->url($filenametostore);
 
+            
+            $usuario->avatar = $imagenameUrl;
         }
-
-        $usuario->avatar = $imagenameUrl;
-
+        
         $usuario->save();
             
         return redirect()->action('UsuarioController@listaUsuarios')->withInput(FacadeRequest::only('nome'));;
 
       }
 
-
-      public function getFromDateAttribute($value) {
+        public function getFromDateAttribute($value) {
         return \Carbon\Carbon::parse($value)->format('Y/m/d');
       }
 
