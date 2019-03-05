@@ -1,0 +1,69 @@
+.titulo-cadastro h1 {
+    margin-left: 1em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-size: 2em;
+
+}
+
+
+.container-flex-cadastro{
+    display:flex;
+}
+
+
+.flex-item-cadastro {
+    margin-top: 1em;
+    margin-left: 2em;
+    width: 80%;
+
+}
+
+.delimitar-imagem {
+    width: 30em;
+    height: 30em;
+}
+
+.imagem-loader {
+    border-radius: 10%;
+    margin-top: 1em;
+    width: 90%;
+    height: 90%;
+    margin-left: 6%;
+
+}
+
+.input-imagem-cadastro {
+    margin-top: 20px;
+    margin-left: 2em;
+
+}
+
+
+.container-flex-email-cpf {
+    justify-content: space-between;
+    display: flex;
+}
+
+.flex-item-cpf {
+    width: 45%;
+}
+
+.flex-item-data-nascimento {
+
+    width: 45%;
+}
+
+.btn-adicionar-usuario {
+
+    margin-top: 100px; 
+    align-self: center;
+    width: 250px;
+
+}
+
+.campo-senha {
+
+    width: 45%;
+
+}

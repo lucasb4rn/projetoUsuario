@@ -1,0 +1,31 @@
+.container-flex-box{
+    justify-content: flex-start;
+    display: flex;
+    width: 100%;
+}
+
+.titulo-detalhes {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1em 0 1em 0;
+
+}
+
+.flex-item2 li {
+    list-style-type:none;
+   
+}
+
+.flex-item2 b {
+
+    list-style-type:none;
+    line-height: 2em;
+    
+}
+
+.img-detalhes{
+    margin-left: 1.5em;
+    width: 200px;
+    height: 200px;
+
+}
