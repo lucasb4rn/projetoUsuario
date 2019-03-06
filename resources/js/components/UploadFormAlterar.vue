@@ -1,7 +1,7 @@
 <template>
     <div class="delimitar-imagem">
         <div v-if=" avatar==null" >
-            <img class="imagem-loader" src= "https://s3-sa-east-1.amazonaws.com/imagensbucket/IMAGEM-PADRAO.png" alt="Image">
+            <img class="imagem-loader" src="https://s3-sa-east-1.amazonaws.com/imagensbucket/IMAGEM-PADRAO.png" alt="Image">
         </div>
         <div v-else> 
             <img class="imagem-loader"  :src= "avatar" alt="Image">
