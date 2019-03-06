@@ -3,7 +3,7 @@
   @section('conteudo')
 
     <div class="titulo-detalhes">
-      <h3>Detalhes do Usuario: {{$user->name}} </h3>
+      <h3>Usuario: {{$user->name}} </h3>
     </div>
 
       <div class="container-flex-box">

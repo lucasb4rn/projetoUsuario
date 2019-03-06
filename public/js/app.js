@@ -37072,7 +37072,11 @@ var render = function() {
       ? _c("div", [
           _c("img", {
             staticClass: "imagem-loader",
-            attrs: { src: "/storage/img-default.jpg", alt: "Image" }
+            attrs: {
+              src:
+                "https://s3-sa-east-1.amazonaws.com/imagensbucket/IMAGEM-PADRAO.png",
+              alt: "Image"
+            }
           })
         ])
       : _c("div", [
@@ -37116,7 +37120,11 @@ var render = function() {
       ? _c("div", [
           _c("img", {
             staticClass: "imagem-loader",
-            attrs: { src: "/storage/img-default.jpg", alt: "Image" }
+            attrs: {
+              src:
+                "https://s3-sa-east-1.amazonaws.com/imagensbucket/IMAGEM-PADRAO.png",
+              alt: "Image"
+            }
           })
         ])
       : _c("div", [
