@@ -4,6 +4,7 @@ namespace projetoUsuario\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class UsuarioAlteraRequest extends FormRequest
 {
@@ -17,8 +18,15 @@ class UsuarioAlteraRequest extends FormRequest
         return [
 
             'name' => 'required | max:40',
-            'email' => 'required | max:40',
-            'cpf' => 'required | cpf',
+            'email' => [
+                 'required', 'max:40', 
+                  Rule::unique('usuarios')->ignore($this->id),
+             ],
+             'cpf' => [
+                 'required', 'max:11', 'cpf',
+                  Rule::unique('usuarios')->ignore($this->id),
+               ],
+
             'data_nascimento' => 'required',
 
         ];
@@ -32,8 +40,9 @@ class UsuarioAlteraRequest extends FormRequest
             'name.required' => 'O Nome não pode ser vazio.',
             'email.required' => 'O Email não pode ser vazio',
             'cpf.required' => 'O CPF não pode ser vazio.',
-            "cpf" => 'CPF em formato inválido, verifique.',
-            "data_nascimento.required" => 'A data de nascimento não pode ser vazia.'
+            "cpf.cpf" => 'Combinação de digitos do CPF não é válida.',
+            "data_nascimento.required" => 'A data de nascimento não pode ser vazia.',
+            "email.unique" => 'Este email já está sendo usuado.'
         ];
         }
 

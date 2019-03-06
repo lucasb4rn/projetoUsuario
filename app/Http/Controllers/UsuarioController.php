@@ -26,37 +26,21 @@ class UsuarioController extends Controller
 
     }
 
+
+
     public function alterar($id, UsuarioAlteraRequest $request) {
         
+
+        //busco o usuario
         $usuario = Usuario::find($id);
-        
+
+        //preenche com os dados do formulario preenchido e atribuie para o usuario
+        //Verificar está opção para não fazer nada caso o objeto não foi alterado
         $usuario->name = FacadeRequest::input('name');
         $usuario->email = FacadeRequest::input('email');
         $usuario->cpf = FacadeRequest::input('cpf');
         $usuario->data_nascimento = FacadeRequest::input('data_nascimento');
         $usuario->situacao_id =  FacadeRequest::input('situacao_id');
-
-
-        $usuario->data_nascimento = self::retornaDataAmericana($usuario->data_nascimento);
-
-
-        $validator = Validator::make($request->all(),[
-            'email' => [
-                'required',
-                Rule::unique('usuarios')->ignore($usuario->id),
-            ],
-            'cpf' => [
-                'required',
-                Rule::unique('usuarios')->ignore($usuario->id),
-            ],
-        ]);
-
-
-        if ($validator->fails())
-            {
-                return back()->withErrors($validator)->withInput();
-            }
-
 
 
         if($request->hasFile('image')) {
@@ -88,6 +72,8 @@ class UsuarioController extends Controller
             $usuario->avatar = $imagenameUrl; 
          }
 
+
+        //salva o usuario com os dados novos 
         $usuario->save();
 
         return redirect()->action('UsuarioController@listaUsuarios');

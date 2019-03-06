@@ -3,6 +3,8 @@
 namespace projetoUsuario\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class UsuarioAdicionaRequest extends FormRequest
 {
@@ -16,8 +18,14 @@ class UsuarioAdicionaRequest extends FormRequest
         return [
 
             'name' => 'required | max:40',
-            'email' => 'required | max:40',
-            'cpf' => 'required | cpf',
+            'email' => [
+                'required', 'max:40', 
+                 Rule::unique('usuarios')->ignore($this->id),
+            ],
+            'cpf' => [
+              'required', 'max:11', 'cpf',
+                Rule::unique('usuarios')->ignore($this->id),
+            ],
             'data_nascimento' => 'required',
             'password' => 'required | min:8',
             'password1' => 'required | min:8 | same:password'
@@ -34,9 +42,12 @@ class UsuarioAdicionaRequest extends FormRequest
             'email.required' => 'O Email não pode ser vazio',
             'password1.required' => 'A confirmação da senha não pode ser vazia.',
             'password.required' => 'A senha não pode ser vazia',
+            'password.min' => 'A senha não pode ter menos que 8 caracteres',
+            'password1.min' => 'A confirmação da senha não pode ter menos que 8 caracteres',
             'cpf.required' => 'O CPF não pode ser vazio.',
+            "cpf.cpf" => 'Combinação de digitos do CPF não é válida.',
             "cpf" => 'CPF em formato inválido, verifique.',
-            'password.same' => 'As senhas não são iguais, verifique.',
+            'password1.same' => 'As senhas não são iguais, verifique.',
             "data_nascimento.required" => 'A data de nascimento não pode ser vazia.'
         ];
         }
