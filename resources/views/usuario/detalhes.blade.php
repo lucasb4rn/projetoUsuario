@@ -9,7 +9,7 @@
       <div class="container-flex-box">
           <div class="flex-item1">
               <figure>
-                <img class="img-detalhes" onerror="this.src='/storage/img-default.jpg';" src="{{$user->avatar}}" alt="Imagem" />
+                <img class="img-detalhes" onerror="this.src='https://s3-sa-east-1.amazonaws.com/imagensbucket/IMAGEM-PADRAO.png';" src="{{$user->avatar}}" alt="Imagem" />
               </figure>
           </div>
 

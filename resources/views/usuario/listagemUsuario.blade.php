@@ -42,7 +42,7 @@
       </thead>
         @foreach ($usuarios as $user)
         <tr class="{{$user->situacao_id == 2 ? 'alert alert-dark borda-black' : '' }}">
-          <td> <img class="img-thumbnail" onerror="this.src='/storage/img-default.jpg';" src="{{$user->avatar}}" alt="Imagem"></td>
+          <td> <img class="img-thumbnail" onerror="this.src='https://s3-sa-east-1.amazonaws.com/imagensbucket/IMAGEM-PADRAO.png';" src="{{$user->avatar}}" alt="Imagem"></td>
           <td> {{$user->name}}</td>
           <td> {{$user->email}}</td>
           <td> {{$user->cpf}}</td>

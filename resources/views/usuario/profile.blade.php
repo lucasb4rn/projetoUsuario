@@ -4,7 +4,7 @@
 
   <div class="row container-profile">
     <div class="col-md-4 img">
-      <img src="{{$user->avatar}}" alt="" class="img-rounded demitacao-imagem">
+      <img src="{{$user->avatar}}" alt="" onerror="this.src='https://s3-sa-east-1.amazonaws.com/imagensbucket/IMAGEM-PADRAO.png';" class="img-rounded demitacao-imagem">
     </div>
     <div class="col-md-6 caixa-texto-profile" >
         <label>NOME DO USUARIO LOGADO:</label>
