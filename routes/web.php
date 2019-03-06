@@ -15,6 +15,7 @@
 //     return view('welcome');
 // });
 
+Route::get('/', 'UsuarioController@listaUsuarios');
 Route::get('/usuarios', 'UsuarioController@listaUsuarios');
 Route::get('/usuarios/mostra/{id}', 'UsuarioController@mostra');
 Route::get('/usuarios/novo', 'UsuarioController@novo');
