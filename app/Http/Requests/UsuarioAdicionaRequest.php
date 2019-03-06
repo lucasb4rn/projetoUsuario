@@ -4,7 +4,7 @@ namespace projetoUsuario\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuariosRequest extends FormRequest
+class UsuarioAdicionaRequest extends FormRequest
 {
     public function authorize()
     {
@@ -28,7 +28,7 @@ class UsuariosRequest extends FormRequest
     public function messages()
         {
         return [
-            'required' => 'The :attribute field can not be empty.',
+            'required' => 'O campo não pode ser vazio.',
             "cpf" => 'CPF inválido',
         ];
         }

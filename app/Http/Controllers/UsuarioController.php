@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Request as FacadeRequest;
 use projetoUsuario\Usuario;
 use Validator;
-use projetoUsuario\Http\Requests\UsuariosRequest;
+use projetoUsuario\Http\Requests\UsuarioAdicionaRequest;
+use projetoUsuario\Http\Requests\UsuarioAlteraRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use projetoUsuario\Situacao;
+use Illuminate\Validation\Rule;
 
 
 
@@ -35,8 +37,9 @@ class UsuarioController extends Controller
 
 
 
-    public function alterar($id, Request $request) {
+    public function alterar($id, UsuarioAlteraRequest $request) {
         
+        return dd(\Auth::user());
 
         //return dd($request->hasFile('image'));
 
@@ -49,17 +52,28 @@ class UsuarioController extends Controller
         $usuario->situacao_id =  FacadeRequest::input('situacao_id');
 
 
+        $validator = Validator::make($request->all(),[
+            'email' => [
+                'required',
+                Rule::unique('usuarios')->ignore($usuario->id),
+            ],
+            'cpf' => [
+                'required',
+                Rule::unique('usuarios')->ignore($usuario->id),
+            ],
+        ]);
+
+
+        if ($validator->fails())
+            {
+                return back()->withErrors($validator)->withInput();
+            }
+
+
 
         if($request->hasFile('image')) {
 
             $imagem = $request->file('image');
-
-
-
-
-            //$imagem = \Image::make($imagem);
-
-            //$imagem->resize(160, 160);
 
             //get filename with extension
             $filenamewithextension = $imagem->getClientOriginalName();
@@ -80,16 +94,12 @@ class UsuarioController extends Controller
                 $nomeDaImagem = $nomeDaImagem[3];
                 Storage::disk('s3')->delete($nomeDaImagem);
             }
-           
             
             //Upload File to s3
             Storage::disk('s3')->put($filenametostore, fopen($imagem, 'r+'), 'public');
-            
             $imagenameUrl =  Storage::disk('s3')->url($filenametostore);
-
             $usuario->avatar = $imagenameUrl; 
-
-        }
+         }
 
         $usuario->save();
 
@@ -102,11 +112,8 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::find($id);
 
-        $usuarioBanco = Usuario::where('id', $id);
-
         return view('usuario.alterar')->with('user', $usuario)->with('situacao', Situacao::all());
 
-        
     }
 
 
@@ -160,7 +167,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function adiciona(Request $request){
+    public function adiciona(UsuarioAdicionaRequest $request){
 
         $usuario = new Usuario();
         $usuario->name = FacadeRequest::input('name');
@@ -172,6 +179,26 @@ class UsuarioController extends Controller
         $usuario->data_nascimento = self::getFromDateAttribute($usuario->data_nascimento);
         $usuario->password = \Hash::make($usuario->password);
         $usuario->situacao_id =  FacadeRequest::input('situacao_id');
+
+      
+
+        $validator = Validator::make($request->all(),[
+            'email' => [
+                'required',
+                Rule::unique('usuarios')->ignore($usuario->id),
+            ],
+            'cpf' => [
+                'required',
+                Rule::unique('usuarios')->ignore($usuario->id),
+            ],
+        ]);
+
+
+        if ($validator->fails())
+        {
+            return back()->withErrors($validator)->withInput();
+        }
+
 
 
         if($request->hasFile('image')) {

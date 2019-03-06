@@ -33,4 +33,4 @@ Route::post('usuarios/login', 'LoginController@login');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
