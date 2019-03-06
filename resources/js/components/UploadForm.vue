@@ -6,7 +6,7 @@
         <div v-else> 
             <img class="imagem-loader"  :src= "avatar" alt="Image">
         </div> 
-        <input class="input-imagem-cadastro" type="file" name="image" @change="GetImage">
+        <input accept="image/*" class="input-imagem-cadastro" type="file" name="image" @change="GetImage">
     </div>
 </template>
 

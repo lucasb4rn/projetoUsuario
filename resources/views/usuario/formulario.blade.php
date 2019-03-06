@@ -34,28 +34,30 @@
 
                     <div class="form-group">
                         <label >Nome: </label>
-                        <input name="name" class="form-control"/>    
+                        <input name="name" value="{{ old('name') }}" class="form-control"/>    
                     </div>
+                    
 
-
-                    <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                    <label >Email: </label>
+                    <label class="sr-only" for="inlineFormInputGroup">Email</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">@</div>
                             </div>
-                        <input type="text" name="email" class="form-control" id="inlineFormInputGroup" placeholder="name@example.com">
+                        <input placeholder="name@example.com" id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
                     </div>
+                 
 
                     <div class="container-flex-email-cpf">
 
                         <div class="form-group flex-item-cpf">
                             <label >CPF: </label>
-                            <input name="cpf" class="form-control"/>    
+                            <input name="cpf" value="{{ old('cpf') }}"class="form-control"/>    
                         </div>
 
                         <div class="form-group flex-item-data-nascimento">
                             <label >Data Nascimento: </label>
-                            <input type="date" name="data_nascimento" class="form-control"/>    
+                            <input type="date" name="data_nascimento" value="{{ old('data_nascimento') }}"class="form-control"/>    
                         </div>
 
                     </div>

@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label>Data nascimento</label>
-                    <input name="data_nascimento" type="data" class="form-control" value="{{$user->data_nascimento}}">
+                    <input name="data_nascimento" type="date" class="form-control" value="{{$user->data_nascimento}}">
                 </div>
 
                 <div class="form-group">

@@ -16,8 +16,8 @@ class UsuarioAlteraRequest extends FormRequest
     {
         return [
 
-            'name' => 'required | max:100',
-            //'email' => 'required | unique:usuarios,email,$this->id,id| max:100',
+            'name' => 'required | max:40',
+            'email' => 'required | max:40',
             'cpf' => 'required | cpf',
             'data_nascimento' => 'required',
 
@@ -27,8 +27,13 @@ class UsuarioAlteraRequest extends FormRequest
     public function messages()
         {
         return [
-            'required' => 'O campo :attribute não pode ser vazio.',
-            "cpf" => 'CPF inválido',
+            'name.max' => 'O tamanho do nome pode ter no maximo 40 caracteres',
+            'email.max' => 'O tamanho do email pode ter no maximo 40 caracteres',
+            'name.required' => 'O Nome não pode ser vazio.',
+            'email.required' => 'O Email não pode ser vazio',
+            'cpf.required' => 'O CPF não pode ser vazio.',
+            "cpf" => 'CPF em formato inválido, verifique.',
+            "data_nascimento.required" => 'A data de nascimento não pode ser vazia.'
         ];
         }
 

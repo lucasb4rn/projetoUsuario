@@ -37084,7 +37084,7 @@ var render = function() {
     _vm._v(" "),
     _c("input", {
       staticClass: "input-imagem-cadastro",
-      attrs: { type: "file", name: "image" },
+      attrs: { accept: "image/*", type: "file", name: "image" },
       on: { change: _vm.GetImage }
     })
   ])

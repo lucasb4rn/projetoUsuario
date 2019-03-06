@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/usuarios', 'UsuarioController@listaUsuarios');
 Route::get('/usuarios/mostra/{id}', 'UsuarioController@mostra');
@@ -23,6 +23,9 @@ Route::get('/usuarios/remove/{id}', 'UsuarioController@remove');
 Route::any('usuarios/pesquisar','UsuarioController@pesquisar');
 Route::get('usuarios/alterar/{id}','UsuarioController@mostraAlterar');
 Route::post('usuarios/alterar/{id}','UsuarioController@alterar');
+Route::get('/profile','ProfileController@showProfile');
+
+//Route::any('/home', 'HomeController@index');
 
 
 
@@ -33,4 +36,3 @@ Route::post('usuarios/login', 'LoginController@login');
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');

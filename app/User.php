@@ -39,4 +39,10 @@ class User extends Authenticatable
     ];
 
     protected $table = 'usuarios';
+
+    public function findForPassport($identifier) {
+       return User::orWhere('email', $identifier)->where('situacao_id', 1)->first();
+    }
+
+
 }

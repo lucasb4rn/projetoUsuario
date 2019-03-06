@@ -6,9 +6,15 @@
   <link href="/css/detalhesUsuario.css" rel="stylesheet">
   <link href="/css/cadastroUsuario.css" rel="stylesheet">
   <link href="/css/alterarUsuario.css" rel="stylesheet">
-
-    <title>Controle de Usuarios</title>
-    
+  <link href="/css/login.css" rel="stylesheet">
+  <link href="/css/profileUsuario.css" rel="stylesheet">
+  <link href="/css/global.css" rel="stylesheet">
+  
+  @yield('styles')
+  
+  
+  <title>Controle de Usuarios</title>
+  
 </head>
 <body>
 <div class="container">
@@ -20,6 +26,15 @@
         </div>
 
           <ul class="nav  navbar-nav navbar-right ">
+            @guest
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+            @endguest
+            @if(auth()->guest())
+              @else
+            <li><a class="nav-item nav-link" href="{{ url('/profile') }}">Profile</a></li>
+              @endif
             <li><a class="nav-item nav-link" href="{{action('UsuarioController@novo')}}">Adicionar Usuario</a></li>
             <li><a class="nav-item nav-link" href="{{action('UsuarioController@listaUsuarios')}}">Listagem</a></li>
             @if(auth()->guest())
@@ -34,7 +49,7 @@
 
       @yield('conteudo')
       
-      <footer class="footer">
+      <footer class="footer footer-bottom">
           <p>© Usuarios com Laravel.</p>
       </footer>
   </div>

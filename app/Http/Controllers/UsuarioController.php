@@ -20,29 +20,14 @@ class UsuarioController extends Controller
 
     public function listaUsuarios(){
 
-        $usuarios = Usuario::paginate(6);
+        $usuarios = Usuario::paginate(5);
 
         return view('usuario/listagemUsuario')->with('usuarios', $usuarios);
 
     }
 
-
-
-    // public function resize($value)
-    // {
-    //     $img = Image::make(storage_path($value))->resize(300, 200);
-    
-    //     return $img->response('jpg');
-    // }
-
-
-
     public function alterar($id, UsuarioAlteraRequest $request) {
         
-        return dd(\Auth::user());
-
-        //return dd($request->hasFile('image'));
-
         $usuario = Usuario::find($id);
         
         $usuario->name = FacadeRequest::input('name');
@@ -50,6 +35,9 @@ class UsuarioController extends Controller
         $usuario->cpf = FacadeRequest::input('cpf');
         $usuario->data_nascimento = FacadeRequest::input('data_nascimento');
         $usuario->situacao_id =  FacadeRequest::input('situacao_id');
+
+
+        $usuario->data_nascimento = self::retornaDataAmericana($usuario->data_nascimento);
 
 
         $validator = Validator::make($request->all(),[
@@ -88,7 +76,6 @@ class UsuarioController extends Controller
             $filenametostore = $filename.'_'.time().'.'.$extension;
      
             //Deleta a imagem atual para não sobrecarregar o bucket com muitas imagens, pois é free...
-
             if(!empty($usuario->avatar)){
                 $nomeDaImagem = explode('/',$usuario->avatar);
                 $nomeDaImagem = $nomeDaImagem[3];
@@ -112,6 +99,9 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::find($id);
 
+        //$usuario->data_nascimento = self::retornaDataBrasileira($usuario->data_nascimento);
+
+
         return view('usuario.alterar')->with('user', $usuario)->with('situacao', Situacao::all());
 
     }
@@ -120,21 +110,23 @@ class UsuarioController extends Controller
 
     public function pesquisar(Request $request){
         
-        
     $texto = FacadeRequest::input('texto');
 
     if($request->input('seletorPesquisa') == 'Nome'){
-        $usuarios = Usuario::where('name', 'like', '%'.$texto.'%')->paginate(6);
+        $usuarios = Usuario::where('name', 'like', '%'.$texto.'%')->paginate(5);
     } elseif($request->input('seletorPesquisa') == 'Email') {
-        $usuarios = Usuario::where('email', 'like', '%'.$texto.'%')->paginate(6);    
+        $usuarios = Usuario::where('email', 'like', '%'.$texto.'%')->paginate(5);    
     } else {
-        $usuarios = Usuario::where('CPF', 'like', '%'.$texto.'%')->paginate(6);    
+        $usuarios = Usuario::where('CPF', 'like', '%'.$texto.'%')->paginate(5);    
     }
 
-
+        //return redirect('/usuarios')->with('usuarios', $usuarios);
+        
         return view('usuario.listagemUsuario')->with('usuarios', $usuarios);
 
     }
+
+
 
     public function mostra($id){
 
@@ -150,11 +142,9 @@ class UsuarioController extends Controller
 
     public function novo() {
 
-
         return view('usuario.formulario')->with('situacao', Situacao::all());
 
     }
-
 
     public function remove($id){
 
@@ -162,8 +152,6 @@ class UsuarioController extends Controller
         $usuarios->delete();
         return redirect()
           ->action('UsuarioController@listaUsuarios');
-
-
     }
 
 
@@ -174,9 +162,12 @@ class UsuarioController extends Controller
         $usuario->email = FacadeRequest::input('email');
         $usuario->cpf = FacadeRequest::input('cpf');
         $usuario->data_nascimento = FacadeRequest::input('data_nascimento');
+
         $usuario->password  = FacadeRequest::input('password');
         $password1 =  FacadeRequest::input('password1');
-        $usuario->data_nascimento = self::getFromDateAttribute($usuario->data_nascimento);
+        //$usuario->data_nascimento = self::retornaDataAmericana($usuario->data_nascimento);
+
+        //return dd($usuario->data_nascimento);
         $usuario->password = \Hash::make($usuario->password);
         $usuario->situacao_id =  FacadeRequest::input('situacao_id');
 
@@ -230,8 +221,12 @@ class UsuarioController extends Controller
 
       }
 
-        public function getFromDateAttribute($value) {
+        public function retornaDataAmericana($value) {
         return \Carbon\Carbon::parse($value)->format('Y/m/d');
+          
       }
 
+         public function retornaDataBrasileira($value) {
+        return \Carbon\Carbon::parse($value)->format('d/m/Y');
+         }
 }
