@@ -81,13 +81,13 @@
                     </select>    
                     </div>
 
+                    <button class="btn btn-primary btn-block btn-adicionar-usuario" type="submit">Adicionar</button>
 
                 </div>
-
+                
             </div>
 
 
-        <button class="btn btn-primary btn-block btn-adicionar-usuario" type="submit">Adicionar</button>
         
     </form>
 

@@ -6,10 +6,25 @@
         <div v-else> 
             <img class="imagem-loader"  :src= "avatar" alt="Image">
         </div> 
-        <input class="input-imagem-cadastro" type="file" name="image" @change="GetImage">
+        <div class="container-flex-upload container-flex-alterar">
+            <div class="item-flex-upload">
+                <label class="btn custom-input-btn fake-buttom">
+                <input type="file" name="image" class="input-imagem-cadastro" style="display:none" accept="*" @change="GetImage">        
+                <i class="fa fa-cloud-upload"></i> Carregar Imagem</label>
+            </div>
+            <div class="item-flex-cancelar">
+                <a href="#" class="btn btn-danger" @click.prevent= "cancelar">Cancelar</a>
+            </div>
+            <div class="item-flex-remover">
+                <a href="#" class="btn btn-danger" @click.prevent= "remover">Remover</a>
+            </div>
+
+        </div>
+
+
+        
     </div>
 </template>
-
 <script>
         
 export default {
@@ -36,9 +51,15 @@ export default {
             }
         },
 
-        Upload(){
-            axios.post('/usuarios/alterar', {'image':this.avatar})
+         remover(){
+            this.avatar = null;
+        },
+
+         cancelar(){
+            this.avatar = this.user.avatar;
         }
+
+
     }
 }
 </script>

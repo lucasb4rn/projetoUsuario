@@ -46,8 +46,8 @@
           <td> {{$user->name}}</td>
           <td> {{$user->email}}</td>
           <td> {{$user->cpf}}</td>
-          <td><a href="{{action('UsuarioController@mostra', $user->id)}}"><i class="fas fa-address-card"></i></a></td>
-          <td><a href="{{action('UsuarioController@alterar', $user->id)}}"><i class="fas fa-user-edit"></i></a></td>
+          <td><a href="{{action('UsuarioController@detalheUsuario', $user->id)}}"><i class="fas fa-address-card"></i></a></td>
+          <td><a href="{{action('UsuarioController@alteraUsuario', $user->id)}}"><i class="fas fa-user-edit"></i></a></td>
           <td><a href="{{action('UsuarioController@remove', $user->id)}}"><i class="fas fa-trash-alt"></i></a></td>
         </tr>
         @endforeach

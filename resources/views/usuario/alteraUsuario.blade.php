@@ -17,7 +17,7 @@
     </div>
     @endif
 
-    <form action="/usuarios/alterar/{{$user->id}}" method="post" enctype="multipart/form-data">
+    <form id="userForm" action="/usuarios/alteraUsuario/{{$user->id}}" method="post" enctype="multipart/form-data">
     
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 
@@ -31,11 +31,11 @@
             <div class="flex-item-dadosAlterar">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input name="name" class="form-control" value="{{$user->name}}">
+                    <input name="name" id="name" class="form-control" value="{{$user->name}}">
                 </div>
                 <div class="form-group">
                     <label>email</label>
-                    <input name="email" class="form-control" value="{{$user->email}}">
+                    <input name="email" id="email" class="form-control" value="{{$user->email}}">
                 </div>
                 <div class="form-group">
                     <label>cpf</label>
@@ -50,25 +50,33 @@
                     <label>Situacao</label>
                     <select name="situacao_id" class="form-control">
                         @foreach($situacao as $s)
-                            @if($user->situacao_id != $s->id)
-                            <option value="{{$s->id}}">{{$s->nome}}</option>
+                            @if($user->situacao_id == $s->id)
+                              <option value="{{$s->id}}">{{$s->nome}}</option>
                             @else {
-                            <option value="{{$s->id}}" selected>{{$s->nome}}</option>
+                              <option value="{{$s->id}}" selected>{{$s->nome}}</option>
                             }
                             @endif
                         @endforeach
                     </select>    
                 </div>
-
+                
+                <button type="submit" class="btn btn-primary botaoAlterar">Alterar</button>
+                
             </div>
-
+            
+            
         </div>
          
-         <button type="submit" class="btn btn-success botaoAlterar">Alterar</button>
 
     </form>
 
 
     <script src="{{asset('js/app.js')}}"></script>   
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>   
+    <script src="{{asset('js/Jquery.js')}}"></script>   
+
+
+  
+
 
 @stop

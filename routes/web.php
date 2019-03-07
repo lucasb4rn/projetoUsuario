@@ -17,13 +17,13 @@
 
 Route::get('/', 'UsuarioController@listaUsuarios');
 Route::get('/usuarios', 'UsuarioController@listaUsuarios');
-Route::get('/usuarios/mostra/{id}', 'UsuarioController@mostra');
+Route::get('/usuarios/mostra/{id}', 'UsuarioController@detalheUsuario');
 Route::get('/usuarios/novo', 'UsuarioController@novo');
 Route::post('/usuarios/adiciona', 'UsuarioController@adiciona');
 Route::get('/usuarios/remove/{id}', 'UsuarioController@remove');
 Route::any('usuarios/pesquisar','UsuarioController@pesquisar');
-Route::get('usuarios/alterar/{id}','UsuarioController@mostraAlterar');
-Route::post('usuarios/alterar/{id}','UsuarioController@alterar');
+Route::get('usuarios/alteraUsuario/{id}','UsuarioController@carregaInformacoesDoUsuarioParaAlterar');
+Route::post('usuarios/alteraUsuario/{id}','UsuarioController@alteraUsuario');
 Route::get('/profile','ProfileController@showProfile');
 
 //Route::any('/home', 'HomeController@index');

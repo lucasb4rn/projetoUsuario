@@ -1,0 +1,26 @@
+.container-flex-upload {
+    display: flex;
+    margin-top: 2em;
+  }
+ 
+  .container-flex-adicionar {
+    margin-left: 7em;
+  }
+ 
+  .fake-buttom {
+   color: #fff;
+   background-color: #38c172;
+   border-color: #38c172;
+ 
+  }
+ 
+  .fake-buttom:hover {
+   color: #fff;
+   background-color: #1a914b;
+   border-color: #137c3f;
+   cursor: pointer;
+  }
+ 
+  .container-flex-alterar{
+   margin-left: 4.5em;
+  }

@@ -18,6 +18,12 @@ use Illuminate\Validation\Rule;
 class UsuarioController extends Controller
 {
 
+
+    
+    /**************************************/
+    /********* LISTA USUARIOS *************/
+    /**************************************/
+
     public function listaUsuarios(){
 
         $usuarios = Usuario::paginate(5);
@@ -28,8 +34,11 @@ class UsuarioController extends Controller
 
 
 
-    public function alterar($id, UsuarioAlteraRequest $request) {
-        
+    /**************************************/
+    /*************** ALTERA ***************/
+    /**************************************/
+
+    public function alteraUsuario($id, UsuarioAlteraRequest $request) {
 
         //busco o usuario
         $usuario = Usuario::find($id);
@@ -81,23 +90,31 @@ class UsuarioController extends Controller
     }
 
 
-    public function mostraAlterar($id){
+    
+    /**************************************/
+    /******* CARREGA PARA ALTERAR *********/
+    /**************************************/
+
+    public function carregaInformacoesDoUsuarioParaAlterar($id){
 
         $usuario = Usuario::find($id);
 
-        //$usuario->data_nascimento = self::retornaDataBrasileira($usuario->data_nascimento);
-
-
-        return view('usuario.alterar')->with('user', $usuario)->with('situacao', Situacao::all());
+        return view('usuario.alteraUsuario')->with('user', $usuario)->with('situacao', Situacao::all());
 
     }
 
 
 
+    
+    /**************************************/
+    /************** PESQUISAR *************/
+    /**************************************/
+
     public function pesquisar(Request $request){
         
     $texto = FacadeRequest::input('texto');
 
+    //refatorar para tirar os ifs e usar when com clausura
     if($request->input('seletorPesquisa') == 'Nome'){
         $usuarios = Usuario::where('name', 'like', '%'.$texto.'%')->paginate(5);
     } elseif($request->input('seletorPesquisa') == 'Email') {
@@ -106,25 +123,27 @@ class UsuarioController extends Controller
         $usuarios = Usuario::where('CPF', 'like', '%'.$texto.'%')->paginate(5);    
     }
 
-        //return redirect('/usuarios')->with('usuarios', $usuarios);
-        
         return view('usuario.listagemUsuario')->with('usuarios', $usuarios);
 
     }
 
 
-
-    public function mostra($id){
+    
+    /**************************************/
+    /*************** DETALHES *************/
+    /**************************************/
+    public function detalheUsuario($id){
 
         $usuario = Usuario::find($id);
 
-        if(empty($usuario)) {
-            return "Esse usuario não existe";
-        }
-
-        return view('usuario/detalhes')->with('user', $usuario);
+        return view('usuario/detalheUsuario')->with('user', $usuario);
 
     }
+
+
+    /***************************************/
+    /********** Tela de adicionar **********/
+    /***************************************/
 
     public function novo() {
 
@@ -132,13 +151,31 @@ class UsuarioController extends Controller
 
     }
 
+
+    /***************************************/
+    /*************** Remover ***************/
+    /***************************************/
+
     public function remove($id){
 
-        $usuarios = Usuario::find($id);
-        $usuarios->delete();
-        return redirect()
-          ->action('UsuarioController@listaUsuarios');
+        $usuario = Usuario::find($id);
+
+        //deletar imagem do bucket para não flodar
+        if(!empty($usuario->avatar)){
+            $nomeDaImagem = explode('/',$usuario->avatar);
+            $nomeDaImagem = $nomeDaImagem[3];
+            Storage::disk('s3')->delete($nomeDaImagem);
+        }
+
+        $usuario->delete();
+
+        return redirect()->action('UsuarioController@listaUsuarios');
     }
+
+
+    /***************************************/
+    /*************** Adicionar**************/
+    /***************************************/
 
 
     public function adiciona(UsuarioAdicionaRequest $request){
@@ -156,26 +193,6 @@ class UsuarioController extends Controller
         //return dd($usuario->data_nascimento);
         $usuario->password = \Hash::make($usuario->password);
         $usuario->situacao_id =  FacadeRequest::input('situacao_id');
-
-      
-
-        $validator = Validator::make($request->all(),[
-            'email' => [
-                'required',
-                Rule::unique('usuarios')->ignore($usuario->id),
-            ],
-            'cpf' => [
-                'required',
-                Rule::unique('usuarios')->ignore($usuario->id),
-            ],
-        ]);
-
-
-        if ($validator->fails())
-        {
-            return back()->withErrors($validator)->withInput();
-        }
-
 
 
         if($request->hasFile('image')) {
@@ -197,7 +214,8 @@ class UsuarioController extends Controller
             
             $imagenameUrl =  Storage::disk('s3')->url($filenametostore);
 
-            
+
+            //so salvar avatar se requisicao for informado o avatar
             $usuario->avatar = $imagenameUrl;
         }
         
@@ -207,6 +225,9 @@ class UsuarioController extends Controller
 
       }
 
+
+
+
         public function retornaDataAmericana($value) {
         return \Carbon\Carbon::parse($value)->format('Y/m/d');
           
@@ -214,5 +235,9 @@ class UsuarioController extends Controller
 
          public function retornaDataBrasileira($value) {
         return \Carbon\Carbon::parse($value)->format('d/m/Y');
-         }
+        }
+
+
+
+
 }
