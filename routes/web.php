@@ -21,7 +21,7 @@ Route::get('/usuarios/detalheUsuario/{id}', 'UsuarioController@detalheUsuario');
 Route::get('/usuarios/cadastroUsuario', 'UsuarioController@cadastroUsuario');
 Route::post('/usuarios/adicionaUsuario', 'UsuarioController@adicionaUsuario');
 Route::get('/usuarios/remove/{id}', 'UsuarioController@remove');
-Route::any('usuarios/pesquisar','UsuarioController@pesquisar');
+Route::any('usuarios/pesquisa','UsuarioController@pesquisa');
 Route::get('usuarios/alteraUsuario/{id}','UsuarioController@carregaInformacoesDoUsuarioParaAlterar');
 Route::post('usuarios/alteraUsuario/{id}','UsuarioController@alteraUsuario');
 Route::get('/profileUsuario','ProfileController@showProfile');

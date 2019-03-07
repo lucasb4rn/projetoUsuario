@@ -107,10 +107,10 @@ class UsuarioController extends Controller
 
     
     /**************************************/
-    /************** PESQUISAR *************/
+    /************** PESQUISA *************/
     /**************************************/
 
-    public function pesquisar(Request $request){
+    public function pesquisa(Request $request){
         
     $texto = FacadeRequest::input('texto');
 
@@ -124,7 +124,6 @@ class UsuarioController extends Controller
     }
 
         return view('usuario.listagemUsuario')->with('usuarios', $usuarios);
-
     }
 
 

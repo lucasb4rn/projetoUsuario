@@ -10,7 +10,7 @@
       </div>
     @endif
 
-    <form class="navbar-form navbar-right" action="/usuarios/pesquisar" method="post">
+    <form class="navbar-form navbar-right" action="/usuarios/pesquisa" method="post">
         <div class="form-group container-barra-pesquisa">
             {!! csrf_field() !!}
             <select name="seletorPesquisa" class="form-control campo-selecao">
