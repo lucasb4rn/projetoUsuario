@@ -13,8 +13,6 @@
               </figure>
           </div>
 
-
-
             <div class="flex-item2">
                 <ul>
                   <li>

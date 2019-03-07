@@ -18,7 +18,7 @@ class ProfileController extends Controller
 
     public function showProfile(){
 
-        return view('usuario.profile')->with('user', Auth::user());
+        return view('usuario.profileUsuario')->with('user', Auth::user());
         
     }
 

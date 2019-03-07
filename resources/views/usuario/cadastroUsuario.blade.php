@@ -18,7 +18,7 @@
     </div>
     @endif
 
-    <form action="/usuarios/adiciona" method="post" enctype="multipart/form-data" >
+    <form action="/usuarios/adicionaUsuario" method="post" enctype="multipart/form-data" >
 
          <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 

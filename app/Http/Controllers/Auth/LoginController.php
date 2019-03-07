@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/profileUsuario';
 
     /**
      * Create a new controller instance.
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
      public function showLoginForm()
     {
-        return view('usuario.form_login');
+        return view('usuario.loginUsuario');
     }
 
     protected function loggedOut(Request $request) {

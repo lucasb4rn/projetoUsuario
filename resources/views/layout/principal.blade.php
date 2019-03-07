@@ -27,7 +27,7 @@
         <div class="container-fluid">
 
         <div class="navbar-header">      
-          <a class="navbar-brand" href="{{action('UsuarioController@listaUsuarios')}}">Controle de Usuarios</a>
+          <a class="navbar-brand nav-logo-titulo" href="{{action('UsuarioController@listaUsuarios')}}">Controle de Usuarios</a>
         </div>
 
           <ul class="nav  navbar-nav navbar-right ">
@@ -38,10 +38,10 @@
             @endguest
             @if(auth()->guest())
               @else
-            <li><a class="nav-item nav-link" href="{{ url('/profile') }}">Profile</a></li>
+            <li><a class="nav-item nav-link" href="{{ url('/profileUsuario') }}">Profile</a></li>
               @endif
-            <li><a class="nav-item nav-link" href="{{action('UsuarioController@novo')}}">Adicionar Usuario</a></li>
-            <li><a class="nav-item nav-link" href="{{action('UsuarioController@listaUsuarios')}}">Listagem</a></li>
+            <li><a class="nav-item nav-link" href="{{action('UsuarioController@cadastroUsuario')}}">Cadastrar Usuario</a></li>
+            <li><a class="nav-item nav-link" href="{{action('UsuarioController@listaUsuarios')}}">Lista de Usuarios</a></li>
             @if(auth()->guest())
               @else
             <li><a class="nav-item nav-link" href="{{ url('/auth/logout') }}">Logout</a></li>

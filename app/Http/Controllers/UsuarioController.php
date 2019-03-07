@@ -145,9 +145,9 @@ class UsuarioController extends Controller
     /********** Tela de adicionar **********/
     /***************************************/
 
-    public function novo() {
+    public function cadastroUsuario() {
 
-        return view('usuario.formulario')->with('situacao', Situacao::all());
+        return view('usuario.cadastroUsuario')->with('situacao', Situacao::all());
 
     }
 
@@ -178,7 +178,7 @@ class UsuarioController extends Controller
     /***************************************/
 
 
-    public function adiciona(UsuarioAdicionaRequest $request){
+    public function adicionaUsuario(UsuarioAdicionaRequest $request){
 
         $usuario = new Usuario();
         $usuario->name = FacadeRequest::input('name');
