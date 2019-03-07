@@ -36,10 +36,7 @@
                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
             </li>
             @endguest
-            @if(auth()->guest())
-              @else
             <li><a class="nav-item nav-link" href="{{ url('/profileUsuario') }}">Profile</a></li>
-              @endif
             <li><a class="nav-item nav-link" href="{{action('UsuarioController@cadastroUsuario')}}">Cadastrar Usuario</a></li>
             <li><a class="nav-item nav-link" href="{{action('UsuarioController@listaUsuarios')}}">Lista de Usuarios</a></li>
             @if(auth()->guest())
