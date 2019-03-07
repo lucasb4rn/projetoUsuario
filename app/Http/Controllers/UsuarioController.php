@@ -120,7 +120,7 @@ class UsuarioController extends Controller
     } elseif($request->input('seletorPesquisa') == 'Email') {
         $usuarios = Usuario::where('email', 'like', '%'.$texto.'%')->paginate(5);    
     } else {
-        $usuarios = Usuario::where('CPF', 'like', '%'.$texto.'%')->paginate(5);    
+        $usuarios = Usuario::where('cpf', 'like', '%'.$texto.'%')->paginate(5);    
     }
 
         return view('usuario.listagemUsuario')->with('usuarios', $usuarios);
