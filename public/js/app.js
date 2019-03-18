@@ -1838,6 +1838,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1862,7 +1864,8 @@ __webpack_require__.r(__webpack_exports__);
       email: '',
       name: '',
       phone: '',
-      url: ''
+      url: '',
+      csrf: document.head.querySelector('meta[name="csrf-token"]').content
     };
   },
   methods: {
@@ -48803,12 +48806,7 @@ var render = function() {
         method: "post",
         enctype: "multipart/form-data"
       },
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.validateBeforeSubmit($event)
-        }
-      }
+      on: { submit: _vm.validateBeforeSubmit }
     },
     [
       _c("div", { staticClass: "container-flex-cadastro" }, [
@@ -48859,11 +48857,20 @@ var render = function() {
           _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "container-flex-email-cpf" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            })
+          ]),
           _vm._v(" "),
           _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", [_vm._v("Situacao")]),
@@ -48919,24 +48926,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-flex-email-cpf" }, [
-      _c("div", { staticClass: "form-group flex-item-cpf" }, [
-        _c("label", [_vm._v("CPF: ")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { name: "cpf", value: "" }
-        })
-      ]),
+    return _c("div", { staticClass: "form-group flex-item-cpf" }, [
+      _c("label", [_vm._v("CPF: ")]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group flex-item-data-nascimento" }, [
-        _c("label", [_vm._v("Data Nascimento: ")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "date", name: "data_nascimento", value: "" }
-        })
-      ])
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { name: "cpf", value: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group flex-item-data-nascimento" }, [
+      _c("label", [_vm._v("Data Nascimento: ")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "date", name: "data_nascimento", value: "" }
+      })
     ])
   },
   function() {

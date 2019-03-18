@@ -1,7 +1,7 @@
 <template>
 
 
-<form action="/usuarios/adicionaUsuario" @submit.prevent="validateBeforeSubmit" method="post" enctype="multipart/form-data" >
+<form action="/usuarios/adicionaUsuario" @submit="validateBeforeSubmit" method="post" enctype="multipart/form-data" >
 
      <div class="container-flex-cadastro">
 
@@ -40,6 +40,8 @@
                             <label >Data Nascimento: </label>
                             <input type="date" name="data_nascimento" value="" class="form-control"/>    
                         </div>
+
+                        <input type="hidden" name="_token" :value="csrf">
 
                     </div>
 
@@ -108,7 +110,8 @@ export default {
     email: '',
     name: '',
     phone: '',
-    url: ''
+    url: '',
+    csrf: document.head.querySelector('meta[name="csrf-token"]').content,
 
   }),
 
@@ -125,6 +128,7 @@ export default {
         }
 
         alert('Correct them errors!');
+
       });
     }
   }
