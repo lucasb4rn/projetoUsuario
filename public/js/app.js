@@ -48879,7 +48879,7 @@ var render = function() {
               "select",
               { staticClass: "form-control", attrs: { name: "situacao_id" } },
               _vm._l(_vm.situacao, function(sit) {
-                return _c("option", { attrs: { value: "sit.id" } }, [
+                return _c("option", { attrs: { value: "situacao_id" } }, [
                   _vm._v(_vm._s(sit.nome))
                 ])
               }),

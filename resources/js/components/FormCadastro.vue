@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <label>Situacao</label>
                         <select name="situacao_id" class="form-control">
-                            <option v-for= "sit in situacao" value="sit.id">{{sit.nome}}</option>
+                            <option v-for= "sit in situacao" value="situacao_id">{{sit.nome}}</option>
                         </select>    
                     </div>
 

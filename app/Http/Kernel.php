@@ -14,6 +14,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \Spatie\Cors\Cors::class,
         \projetoUsuario\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \projetoUsuario\Http\Middleware\TrimStrings::class,
