@@ -22,7 +22,7 @@
   
 </head>
 <body>
-<div class="container">
+
       <nav class="navbar navbar-default navbar-expand-lg">
         <div class="container-fluid">
 
@@ -49,11 +49,15 @@
         </div>
       </nav>
 
+      <div class="container">
+
       @yield('conteudo')
+
+      </div>
       
       <footer class="footer footer-bottom">
           <p>© Usuarios com Laravel.</p>
       </footer>
-  </div>
+  
 </body>
 </html>

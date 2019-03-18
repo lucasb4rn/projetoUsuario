@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use projetoUsuario\Situacao;
 use Illuminate\Validation\Rule;
+use projetoUsuario\Http\Resources\UsuarioResource;
 
 
 
@@ -131,11 +132,23 @@ class UsuarioController extends Controller
     /**************************************/
     /*************** DETALHES *************/
     /**************************************/
+
     public function detalheUsuario($id){
 
         $usuario = Usuario::find($id);
 
         return view('usuario/detalheUsuario')->with('user', $usuario);
+
+    }
+
+
+
+    public function api(){
+
+
+        $user = Usuario::paginate(6);
+
+        return \Response::json($user, 200);
 
     }
 

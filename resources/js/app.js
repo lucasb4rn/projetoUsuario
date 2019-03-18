@@ -1,33 +1,22 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+import Vue from 'vue';
+import VueResource from 'vue-resource';
 import UploadForm from './components/UploadForm';
-import UploadFormAlterar from './components/UploadFormAlterar';
+import FormCadastro from './components/FormCadastro';
+import ListaUsuario from './components/ListaUsuario';
+import VeeValidate from 'vee-validate';
+import VcPagination from './components/VcPagination';
+import Paginate from 'vuejs-paginate';
+
+Vue.component('paginate', Paginate)
+Vue.use(VeeValidate);
+Vue.use(VueResource);
+
+
 
 //adicionar
 const app = new Vue({
@@ -36,10 +25,25 @@ const app = new Vue({
 
 });
 
-const app10 = new Vue({
-    el: '#app1',
-    components:{UploadFormAlterar}
+
+const app1 = new Vue({
+
+    el: '#formCadastro',
+    components:{FormCadastro},
 
 });
+
+
+const app2 = new Vue({
+  el: '#app2',
+  components:{ListaUsuario, VcPagination}
+
+ });
+
+
+
+
+
+
 
 

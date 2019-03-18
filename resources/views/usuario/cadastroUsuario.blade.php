@@ -2,8 +2,6 @@
   
   @section('conteudo')
 
-  <script src="main.js"></script>
-
     <div class="titulo-cadastro">
         <h1>Novo Usuario</h1>
     </div>
@@ -18,25 +16,30 @@
     </div>
     @endif
 
-    <form action="/usuarios/adicionaUsuario" method="post" enctype="multipart/form-data" >
+    <!-- <form action="/usuarios/adicionaUsuario" v-on:submit.prevent method="post" enctype="multipart/form-data" >
 
-         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" /> -->
 
 
-            <div class="container-flex-cadastro">
                 
-                <div class="flex-item-imagem" id="app">
-                    <upload-form></upload-from>
-                </div>
+            <div id="formCadastro">
+
+                
+
+                    <form-cadastro :situacao="{{$situacao}}" > </form-cadastro>
 
 
-                 <div class="flex-item-cadastro">
+            </div> 
+
+         
+
+
+                 <!-- <div class="flex-item-cadastro">
 
                     <div class="form-group">
                         <label >Nome: </label>
                         <input name="name" value="{{ old('name') }}" class="form-control"/>    
-                    </div>
-                    
+                    </div>                  
 
                     <label >Email: </label>
                     <label class="sr-only" for="inlineFormInputGroup">Email</label>
@@ -81,15 +84,14 @@
                     </select>    
                     </div>
 
-                    <button class="btn btn-primary btn-block btn-adicionar-usuario" type="submit">Adicionar</button>
+                    <button class="btn btn-primary btn-block btn-adicionar-usuario" @submit.prevent type="submit">Adicionar</button>
 
-                </div>
+                </div> -->
                 
-            </div>
 
 
         
-    </form>
+    <!-- </form> -->
 
 
    <script src="{{asset('js/app.js')}}"></script>   

@@ -25,6 +25,7 @@ Route::any('usuarios/pesquisa','UsuarioController@pesquisa');
 Route::get('usuarios/alteraUsuario/{id}','UsuarioController@carregaInformacoesDoUsuarioParaAlterar');
 Route::post('usuarios/alteraUsuario/{id}','UsuarioController@alteraUsuario');
 Route::get('/profileUsuario','ProfileController@showProfile');
+Route::get('/api','UsuarioController@api');
 
 //Route::any('/home', 'HomeController@index');
 

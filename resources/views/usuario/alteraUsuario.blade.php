@@ -23,8 +23,8 @@
 
         <div class="container-flex-alterarUsuario">
             <div class="item-flex-imagemAlterar">
-                <div id="app1">
-                    <upload-form-alterar :user="{{$user}}"></upload-form-alterar>
+                <div id="app">
+                    <upload-form imagem="{{$user->avatar}}"></upload-form>
                 </div> 
             </div>
 
